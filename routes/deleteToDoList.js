@@ -32,7 +32,7 @@ exports.deleteToDoList = router.delete("/toDoList", function (req, res, next) {
             if (error) {
               throw error;
             }
-            res.status(204).send();
+            res.status(204).send(null);
             client.close();
           });
       } catch (error) {
