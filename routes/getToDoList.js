@@ -31,6 +31,7 @@ exports.getToDoList = router.get("/toDoList", function (req, res, next) {
       client.close();
     } catch (error) {
       console.error(error);
+      client.close();
       res.status(500).send({ error: "Unexpected Error Occured" });
     }
   });

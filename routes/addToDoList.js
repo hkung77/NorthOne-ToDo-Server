@@ -41,6 +41,7 @@ exports.addToDoList = router.post("/toDoList", function (req, res, next) {
               if (error) {
                 throw error;
               } else {
+                // Returns newly created document
                 res.status(201).send(response.ops[0]);
               }
             }
@@ -49,6 +50,7 @@ exports.addToDoList = router.post("/toDoList", function (req, res, next) {
         client.close();
       } catch (error) {
         console.log(error);
+        client.close();
         res.status(500).send({ error: "Unexpected Error Occured" });
       }
     });

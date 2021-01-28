@@ -40,11 +40,13 @@ exports.updateToDoList = router.patch("/toDoList", function (req, res, next) {
                 throw error;
               } else {
                 res.status(200).send(response.value);
+                client.close();
               }
             }
           );
       } catch (error) {
         console.log(error);
+        client.close();
         res.status(500).send({ error: "Unexpected Error Occured" });
       }
     });

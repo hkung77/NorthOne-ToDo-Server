@@ -37,6 +37,7 @@ exports.deleteToDoList = router.delete("/toDoList", function (req, res, next) {
           });
       } catch (error) {
         console.error(error);
+        client.close();
         res.status(500).send({ error: "Unexpected Error Occured" });
       }
     });
