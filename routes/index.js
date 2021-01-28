@@ -1,6 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const toDoList = require("./toDoList");
+const { updateToDoList } = require("./updateToDoList");
+const { addToDoList } = require("./addToDoList");
+const { getToDoList } = require("./getToDoList");
+const { deleteToDoList } = require("./deleteToDoList");
 
-router.get("/toDoList", toDoList.getToDoList);
+router.get("/toDoList", getToDoList);
+router.post("/toDoList", addToDoList);
+router.delete("/toDoList", deleteToDoList);
+router.patch("/toDoList", updateToDoList);
+
 module.exports = router;

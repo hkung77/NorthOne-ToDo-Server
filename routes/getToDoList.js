@@ -1,3 +1,4 @@
+const mongodb = require("mongodb");
 const MongoClient = require("mongodb").MongoClient;
 const express = require("express");
 const router = express.Router();
@@ -26,22 +27,11 @@ exports.getToDoList = router.get("/toDoList", function (req, res, next) {
         .toArray();
 
       res.status(200).send(toDoList);
+
+      client.close();
     } catch (error) {
       console.error(error);
       res.status(500).send({ error: "Unexpected Error Occured" });
     }
   });
-});
-
-// Create a new to do item
-exports.addToDoList = router.post("/toDoList", function (req, res, next) {
-  res.status(200).send([]);
-});
-
-exports.deleteToDoList = router.post("/toDoList", function (req, res, next) {
-  res.status(200).send([]);
-});
-
-exports.updateToDoList = router.post("/toDoList", function (req, res, next) {
-  res.status(200).send([]);
 });
