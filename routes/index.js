@@ -1,3 +1,6 @@
+const express = require("express");
+const router = express.Router();
 const toDoList = require("./toDoList");
 
-exports.toDoList = toDoList;
+router.get("/toDoList", toDoList.getToDoList);
+module.exports = router;

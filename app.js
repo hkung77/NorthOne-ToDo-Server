@@ -1,4 +1,5 @@
 var createError = require("http-errors");
+var dotenv = require("dotenv");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
@@ -7,6 +8,8 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 
 var app = express();
+
+dotenv.config();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
