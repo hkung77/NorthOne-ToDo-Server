@@ -9,6 +9,7 @@ exports.getToDoList = router.get("/toDoList", function (req, res, next) {
   const MONGO_PASSWORD = process.env.MONGODB_PASSWORD;
 
   const URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@magic.uxmiw.mongodb.net/magic?authSource=admin&retryWrites=true&w=majority`;
+  const { search = "" } = req.query;
 
   const client = new MongoClient(URL, {
     useNewUrlParser: true,
@@ -20,11 +21,18 @@ exports.getToDoList = router.get("/toDoList", function (req, res, next) {
       throw err;
     }
     try {
-      const toDoList = await client
+      let toDoList = await client
         .db("NorthOne")
         .collection("ToDoList")
         .find()
         .toArray();
+
+      // Filters items by search text
+      if (search.length > 0) {
+        toDoList = toDoList.filter((toDoItem) =>
+          toDoItem.title.match(new RegExp(search, "gi"))
+        );
+      }
 
       res.status(200).send(toDoList);
 
